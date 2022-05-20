@@ -10,3 +10,22 @@ Hemos escogido microservicios debido a que nuestros principales casos de uso:
 - Scraping
 
 Son acciones complejas que no están relacionadas por lo que es factible separar cada uso en un servidor diferente de tal forma que no sea necesario detener la API cuando se necesita realizar mantenimiento en alguno de los servicios. 
+
+### Directorios:
+```py
+-cli_API
+|--controlador.py
+|--servicio.py
+
+-server_ADMIN
+|--controlador.py
+|--dao.py
+|--servicio.py
+-server_API
+|--controlador.py
+|--servicio.py
+-server_SEARCH
+|--controlador.py
+|--dao.py
+|--servicio.py
+```
