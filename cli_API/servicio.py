@@ -16,6 +16,9 @@ while terminar == 1:
 
 terminar = 0
 while terminar != 1:
-    controlador.busqueda()
-    controlador.insercion()
-    terminar = int(input("SI YA NO QUIERE REPETIR, PRESIONE 1"))
+    opcion = int(input("INGRESE 1 PARA BUSCAR TODO Y 2 PARA INSERTAR NUEVOS DATOS: "))
+    if opcion == 1:
+        controlador.busqueda()
+    elif opcion == 2:
+        controlador.insercion()
+    terminar = int(input("SI YA NO QUIERE HACER OTRA ACCION, PRESIONE 1: "))
