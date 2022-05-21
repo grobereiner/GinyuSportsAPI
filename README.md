@@ -11,7 +11,8 @@ Hemos escogido microservicios debido a que nuestros principales casos de uso:
 
 Son acciones complejas que no están relacionadas por lo que es factible separar cada uso en un servidor diferente de tal forma que no sea necesario detener la API cuando se necesita realizar mantenimiento en alguno de los servicios. 
 
-### Directorios:
+### Directorios y diagrama:
+
 ```py
 -cli_API
 |--controlador.py
@@ -29,3 +30,5 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 |--dao.py
 |--servicio.py
 ```
+
+![](img/diagram.png)
