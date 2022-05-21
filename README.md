@@ -6,10 +6,13 @@
 ## Estructura del proyecto: Microservicios
 Hemos escogido microservicios debido a que nuestros principales casos de uso:
 
-- Búsqueda específica
-- Scraping (Insercion)
+- Búsqueda específica de partidos
+- Scraping de partidos y actualización de base de datos
 
-Son acciones complejas que no están relacionadas por lo que es factible separar cada uso en un servidor diferente de tal forma que no sea necesario detener la API cuando se necesita realizar mantenimiento en alguno de los servicios. Por ejemplo, un usuario puede estar realizando búsquedas mientras se está optimizando el algoritmo de scraping en el servicio de administrador.
+Son acciones complejas que no están relacionadas por lo que es factible separar cada uso en un servidor diferente de tal forma que no sea necesario detener la API cuando se necesita realizar mantenimiento en alguno de los servicios. Por ejemplo: 
+
+- Un usuario puede estar realizando búsquedas mientras se está optimizando el algoritmo de scraping en el servicio de administrador.
+- Los administradores pueden estar scrapeando nueva información mientras que se añaden nuevas funciones a las acciones de un usuarios.
 
 ### Directorios y diagrama:
 
