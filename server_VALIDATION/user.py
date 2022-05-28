@@ -1,3 +1,4 @@
+"""
 from flask import Flask, jsonify, session, redirect
 from passlib.hash import pbkdf2_sha256
 from validation import db
@@ -46,3 +47,4 @@ class User:
             return self.start_session(user)
         
         return jsonify({ "error": "Invalid login credentials" }), 401
+"""

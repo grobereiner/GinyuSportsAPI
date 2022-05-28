@@ -18,8 +18,8 @@ class User:
         del user['password']
         session['logged_in'] = True
         session['user'] = user
-        ##return jsonify(user), 200
-        return "signup success"
+        #return jsonify(user), 200
+        return redirect('/logged')
 
     def signup(self):
         _email = input("Insert your email: ")
@@ -39,7 +39,8 @@ class User:
             #return jsonify({"error": "Email address already in use"}), 400
 
         if db.users.insert_one(user):
-            return "signup success" #self.start_session(user)
+            print("signup success")
+            return redirect('/logged') #self.start_session(user)
 
         return "Signup failed"
 
@@ -55,7 +56,8 @@ class User:
         })
 
         if user and pbkdf2_sha256.verify(_password, user['password']):
-            return "login success" #self.start_session(user)
+            print("login success")
+            return redirect('/logged')  # self.start_session(user)
 
         return "Invalid login credentials" #jsonify({"error": "Invalid login credentials"}), 401
 
