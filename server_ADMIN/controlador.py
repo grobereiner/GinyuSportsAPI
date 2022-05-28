@@ -1,8 +1,13 @@
+from scrap import Scrap
+
 dummy_db = "../server_SEARCH/file.txt"
-success = "EXITOSO"
+success = "EXITOSO, ELEMENTOS SCRAPEADOS:\n"
 
 def main(prompt):
+    global success
+    result = success
     with open(dummy_db, "a") as f:
-        f.write('\n'+str(prompt))
+        f.write(Scrap(prompt))
         f.close()
-    return success
+    result += Scrap(prompt)
+    return result
