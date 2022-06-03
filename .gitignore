@@ -3,3 +3,5 @@
 /server_SEARCH/__pycache__
 /cli_API/__pycache__
 /.vscode
+/server_BMQ/__pycache__
+/server_BMQ/*.csv
