@@ -3,6 +3,7 @@ import controlador
 
 app = Flask(__name__)
 
+
 @app.route("/<prompt>")
 def main(prompt):
     return controlador.main(prompt)
