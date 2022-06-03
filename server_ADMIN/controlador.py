@@ -1,13 +1,14 @@
-from scrap import Scrap
+import scrap
+import app
 
-dummy_db = "../server_SEARCH/file.txt"
 success = "EXITOSO, ELEMENTOS SCRAPEADOS:\n"
 
 def main(prompt):
-    global success
-    result = success
-    with open(dummy_db, "a") as f:
-        f.write(Scrap(prompt))
-        f.close()
-    result += Scrap(prompt)
-    return result
+    registros = scrap.Scrap(prompt)
+    for i in registros:
+        try:
+            app.db.session.add(i)
+            app.db.session.commit()
+        except:
+            raise Exception("ERROR AGREGANDO RESULTADOS")
+    return success
