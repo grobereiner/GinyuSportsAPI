@@ -1,6 +1,5 @@
-from flask import redirect, session
+from flask import session
 from passlib.hash import pbkdf2_sha256
-# from functools import wraps
 import pymongo
 
 client = pymongo.MongoClient('localhost', 27017)
