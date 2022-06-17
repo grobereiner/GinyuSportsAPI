@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-CLIENT_SECRET_FILE = "server_API/Gmail/client_id.json"
+CLIENT_SECRET_FILE = r"E:\Eduardo\UTEC\2022-1\Software\client_id.json"
 API_SERVICE_NAME = "gmail"
 API_VERSION = "v1"
 SCOPES = ["https://mail.google.com/"]
