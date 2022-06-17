@@ -1,4 +1,7 @@
-/server_ADMIN/__pycache__
-/server_API/__pycache__
-/server_SEARCH/__pycache__
-/cli_API/__pycache__
+__pycache__/
+
+.vscode/*.!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
