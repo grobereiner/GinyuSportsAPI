@@ -5,3 +5,6 @@ __pycache__/
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+/server_API/Gmail/API_key.txt
+/server_API/Gmail/client_id.json
