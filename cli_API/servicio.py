@@ -18,14 +18,17 @@ while terminar == 1:
 
 controlador.validation()
 
+token = input("Ingrese el token que se le ha enviado al correo que proporcionó: ")
 opcion = 0
 while opcion != 9:
     opcion = int(input("INGRESE 1 PARA BUSCAR TODO, 2 PARA INSERTAR NUEVOS DATOS, 3 PARA HACER SIGN OUT y 9 PARA SALIR: "))
     if opcion == 1:
-        controlador.busqueda()
+        controlador.busqueda(token)
     elif opcion == 2:
-        controlador.insercion()
+        controlador.insercion(token)
     elif opcion == 3:
         controlador.signout()
         controlador.validation()
+        token = input("Ingrese el token que se le ha enviado al correo que proporcionó: ")
+
     
