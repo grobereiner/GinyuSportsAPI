@@ -12,6 +12,7 @@ def token_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         token = None
+        email = request.headers["email"]
 
         if "jwt_token" in request.headers:
             token = request.headers["jwt_token"]
@@ -22,9 +23,11 @@ def token_required(f):
             decoded_token = jwt.decode(token, app.secret_key, algorithms="HS256")
         except: 
             return "Token inválido, haga sign out y genere uno nuevo"
-        if db.users.find_one({"email": decoded_token["user"]}):
+
+        if db.users.find_one({"email": decoded_token["user"]})["email"] == email:
             return f(*args, **kwargs)
         return "Token inválido, no hay match con la base de datos. Haga sign out"
+
     return wrap
 
 @app.route("/")

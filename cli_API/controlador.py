@@ -28,16 +28,18 @@ def validation():
         else:
             print("Ingrese una opción válida")
 
+    return email
+
 def signout():
     resp = requests.get(url="http://127.0.0.1:5000/signout")
     print(resp.text+'\n')
 
-def busqueda(token):
+def busqueda(token, email):
     print("HACEMOS UNA BUSQUEDA TOTAL DE RESULTADOS:")
-    resp = requests.get(url="http://127.0.0.1:5000/search/Cualquiera", headers = {"jwt_token": token})
+    resp = requests.get(url="http://127.0.0.1:5000/search/Cualquiera", headers = {"jwt_token": token, "email": email})
     print(resp.text+'\n')
 
-def insercion(token):
+def insercion(token, email):
     resultado = input("Hacemos una insercion, ingrese un resultado: ")
-    resp = requests.get(url=("http://127.0.0.1:5000/admin/"+resultado), headers={"jwt_token" : token})
+    resp = requests.get(url=("http://127.0.0.1:5000/admin/"+resultado), headers={"jwt_token": token, "email": email})
     print(resp.text+'\n')
