@@ -2,7 +2,7 @@ import requests
 import psycopg2
 from time import sleep
 
-bmq_addr = "http://127.0.0.1:5009/enviar"
+bmq_addr = "http://127.0.0.1:5003/enviar"
 # CAMBIAR PARA UN DIRECTORIO MEJOR
 temp_file_path = "C:/Users/Public/Documents/TEMP/temp.csv"
 

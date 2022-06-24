@@ -19,4 +19,4 @@ def enviar():
     return texto
 
 
-app.run(port = 5009, debug=True)
+app.run(port = 5003, debug=True)
