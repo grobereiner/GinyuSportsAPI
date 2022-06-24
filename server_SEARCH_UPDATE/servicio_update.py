@@ -1,14 +1,17 @@
 import requests
 import psycopg2
 from time import sleep
+import json
 
 bmq_addr = "http://127.0.0.1:5003/enviar"
 # CAMBIAR PARA UN DIRECTORIO MEJOR
 temp_file_path = "C:/Users/Public/Documents/TEMP/temp.csv"
 
-queryUpdate = "COPY resultados(fecha, team_one, team_two, resultado) FROM '"
+queryUpdate = "COPY resultados(fecha, team_one, team_two, resultado, pais) FROM '"
 queryUpdate += temp_file_path
 queryUpdate += "' DELIMITER ',' CSV HEADER;"
+
+queryCountries = "select distinct pais from resultados;"
 
 while True:
     conn = psycopg2.connect(
@@ -29,8 +32,18 @@ while True:
                 f.write(r.text)
                 f.close()
             try:
+                # ACTUALIZAR DATOS
                 cur.execute(query=queryUpdate)
                 conn.commit()
+                
+                # ACTUALIZAR PAISES
+                cur.execute(query=queryCountries)
+                pais_filas = cur.fetchall()
+                paises = [pais[0]  for pais in pais_filas]
+
+                f = open("countries.json", "w")
+                json.dump(paises, f)
+                f.close()
                 pass
             except:
                 print("Fallo en la subida")

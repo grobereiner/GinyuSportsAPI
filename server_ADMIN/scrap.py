@@ -33,6 +33,7 @@ def Scrap(params):
         result += dateFormat(attr[0].text) + ','
         result += attr[1].text[:-1] +','
         result += attr[3].text[1:]+','
-        result += attr[2].text
+        result += attr[2].text+','
+        result += params
         result += '\n'
     return result

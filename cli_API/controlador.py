@@ -35,11 +35,12 @@ def signout():
     print(resp.text+'\n')
 
 def busqueda(token, email):
-    print("HACEMOS UNA BUSQUEDA TOTAL DE RESULTADOS:")
-    resp = requests.get(url="http://127.0.0.1:5000/search/Cualquiera", headers = {"jwt_token": token, "email": email})
+    print("HACEMOS UNA BUSQUEDA DE RESULTADOS:")
+    consulta = input("INGRESE SU CONSULTA (EN LENGUAJE NATURAL - ingles): ")
+    resp = requests.get(url="http://127.0.0.1:5000/search/"+consulta, headers = {"jwt_token": token, "email": email})
     print(resp.text+'\n')
 
 def insercion(token, email):
-    resultado = input("Hacemos una insercion, ingrese un resultado: ")
+    resultado = input("HACEMOS UNA INSERCION DE RESULTADOS, INGRESAR EL NOMBRE DEL PAIS A OBTENER DATOS DE SU LIGA (en ingles): ")
     resp = requests.get(url=("http://127.0.0.1:5000/admin/"+resultado), headers={"jwt_token": token, "email": email})
     print(resp.text+'\n')
