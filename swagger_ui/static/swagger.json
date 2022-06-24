@@ -1,0 +1,38 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"description": "API routes",
+		"version": "1.0.0",
+		"title": "Ginyu Sports API"
+	},
+	"servers": [
+		{
+			"url": "/admin_login"
+		},
+		{
+			"url": "/user_login"
+		},
+		{
+			"url": "/search"
+		},
+		{
+			"url": "/"
+		}
+	],
+	"tags": [
+		{
+			"name": "Server search",
+			"description": "API for requesting data"
+		}
+	],
+	"paths": {
+		"/requests": {
+			"get": {
+				"tags": [
+					"Server search"
+				],
+				"summary": "bro momento"
+			}
+		}
+	}
+}
