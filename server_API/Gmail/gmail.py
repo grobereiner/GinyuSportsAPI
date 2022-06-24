@@ -9,16 +9,15 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-CLIENT_SECRET_FILE = "server_API/Gmail/client_id.json"
+CLIENT_SECRET_FILE = "Gmail/client_id.json"
 API_SERVICE_NAME = "gmail"
 API_VERSION = "v1"
 SCOPES = ["https://mail.google.com/"]
 
-creds = None
-
-token_file = "server_API/Gmail/token.json"
+token_file = "Gmail/token.json"
 
 def Create_Service():
+    creds = None
     # Se verifica si existen credenciales para acceder a la cuenta (es decir, si ya se ha accedido antes)
     if os.path.exists(token_file):
             creds = Credentials.from_authorized_user_file(token_file, SCOPES)

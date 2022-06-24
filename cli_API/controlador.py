@@ -1,11 +1,18 @@
 import requests
+import re
 
 def validation():
     while True:
         print("VALIDATION \n Ingrese 1 para registrarse \n Ingrese 2 para acceder a su cuenta")
         opcion = int(input(""))
-        email = input("Ingrese su email: ")
-        password = input("Ingrese su token: ")
+        while True:
+            email = input("Ingrese su email: ")
+            email_regex = "^[a-zA-Z0-9-_.]+@[a-zA-Z0-9]+(\.[a-z]{1,3})+$"
+            if re.match(email_regex, email):
+                break
+            else:
+                print("Ingrese un email válido")
+        password = input("Ingrese su contraseña: ")
         if opcion == 1:
             req = requests.post(url="http://127.0.0.1:5000/signup", data={"email": email, "password": password})
             print(req.text)
@@ -21,16 +28,18 @@ def validation():
         else:
             print("Ingrese una opción válida")
 
+    return email
+
 def signout():
     resp = requests.get(url="http://127.0.0.1:5000/signout")
     print(resp.text+'\n')
 
-def busqueda():
+def busqueda(token, email):
     print("HACEMOS UNA BUSQUEDA TOTAL DE RESULTADOS:")
-    resp = requests.get(url="http://127.0.0.1:5000/search/Cualquiera")
+    resp = requests.get(url="http://127.0.0.1:5000/search/Cualquiera", headers = {"jwt_token": token, "email": email})
     print(resp.text+'\n')
 
-def insercion():
+def insercion(token, email):
     resultado = input("Hacemos una insercion, ingrese un resultado: ")
-    resp = requests.get(url=("http://127.0.0.1:5000/admin/"+resultado))
+    resp = requests.get(url=("http://127.0.0.1:5000/admin/"+resultado), headers={"jwt_token": token, "email": email})
     print(resp.text+'\n')
