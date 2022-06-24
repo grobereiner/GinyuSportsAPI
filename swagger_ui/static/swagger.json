@@ -6,32 +6,64 @@
 		"title": "Ginyu Sports API"
 	},
 	"servers": [
-		{
-			"url": "/admin_login"
-		},
-		{
-			"url": "/user_login"
-		},
-		{
-			"url": "/search"
-		},
-		{
-			"url": "/"
-		}
+		{ "url": "/admin" },
+		{ "url": "/api" },
+		{ "url": "/search" },
+		{ "url": "/bmq" }
 	],
 	"tags": [
 		{
-			"name": "Server search",
-			"description": "API for requesting data"
+			"name": "SEARCH service",
+			"description": "Server that allows "
+		},
+		{
+			"name": "Scrap service",
+			"description": ""
 		}
 	],
 	"paths": {
 		"/requests": {
 			"get": {
 				"tags": [
-					"Server search"
+					"SEARCH service"
 				],
 				"summary": "bro momento"
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Partido": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "id"
+					},
+					"fecha":{
+						"type": "date"
+					},
+					"team_one": {
+						"type": "string"
+					},
+					"team_two": {
+						"type": "string"
+					},
+					"resultado": {
+						"type": "string",
+						"format": "golesEquipo1-golesEquipo2"
+					}
+				}
+			},
+			"Usuario": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
 			}
 		}
 	}
