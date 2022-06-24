@@ -8,4 +8,4 @@ app = Flask(__name__)
 def main(prompt):
     return controlador.main(prompt)
 
-app.run(port=5001)
+app.run(port=5001, debug=True)
