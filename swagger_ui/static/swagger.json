@@ -6,8 +6,10 @@
 		"title": "Ginyu Sports API"
 	},
 	"servers": [
-
-		{ "url": "/"}
+		{ "url": "/admin"},
+		{ "url": "/api" },
+		{ "url": "/search" },
+		{ "url": "/" }
 	],
 	"tags": [
 		{
@@ -54,12 +56,24 @@
 			"post": {
 				"tags": [ "Scrap service" ],
 				"summary": "Hace un scrapping de los resultados ingresados en el prompt",
+				"parameters": [
+					{
+						"name": "prompt",
+						"in": "path",
+						"required": true,
+						"description": "Informacion que sera recuperada mediante el scrapping",
+						"type": "string"
+					}
+				],
 				"responses": {
 					"201": {
 						"description": "Carga los elementos a la base de datos y la actualiza",
 						"schema": {
 							"$ref": "#/components/schemas/Partido"
 						}
+					},
+					"405": {
+						"description": "Servicio de scrapping no funcional"
 					}
 				}
 			}
