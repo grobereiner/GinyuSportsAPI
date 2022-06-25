@@ -4,8 +4,12 @@ import jwt
 import datetime
 from Gmail.gmail import send_token_email
 import re
+import certifi
 
-client = pymongo.MongoClient('localhost', 27017)
+ca = certifi.where()
+
+client = pymongo.MongoClient(
+    "mongodb+srv://earr99:LnEX8MnvCm7ZEwEH@ginyusportsapi.jva4j.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
 db = client.login
 
 
