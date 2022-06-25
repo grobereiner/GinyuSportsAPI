@@ -6,28 +6,114 @@
 		"title": "Ginyu Sports API"
 	},
 	"servers": [
-		{ "url": "/admin" },
-		{ "url": "/api" },
-		{ "url": "/search" },
-		{ "url": "/bmq" }
+
+		{ "url": "/"}
 	],
 	"tags": [
 		{
 			"name": "SEARCH service",
-			"description": "Server that allows "
+			"description": "Servicio para realizar busquedas en la base de datos"
 		},
 		{
 			"name": "Scrap service",
-			"description": ""
+			"description": "Servicio para scrappear resultados de partidos de futbol de una pagina y cargarlos a la base de datos"
+		},
+		{
+			"name": "API service",
+			"description": "Servicios relacionados al API"
 		}
 	],
 	"paths": {
-		"/requests": {
+		"/{query}": {
 			"get": {
-				"tags": [
-					"SEARCH service"
-				],
-				"summary": "bro momento"
+				"tags": [ "SEARCH service" ],
+				"summary": "Realiza una consulta a la base de datos",
+				"responses": {
+					"200": {
+						"description": "Devuelve la lista de partidos relacionados a la consulta",
+						"schema": {
+							"$ref": "#/components/schemas/Partido"
+						}
+					},
+					"503": {
+						"description": "Servicio no disponible"
+					}
+				},
+				"parameters": [
+					{
+						"name": "query",
+						"in": "path",
+						"required": true,
+						"description": "Nombre de equipo o equipos",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/{prompt}": {
+			"post": {
+				"tags": [ "Scrap service" ],
+				"summary": "Hace un scrapping de los resultados ingresados en el prompt",
+				"responses": {
+					"201": {
+						"description": "Carga los elementos a la base de datos y la actualiza",
+						"schema": {
+							"$ref": "#/components/schemas/Partido"
+						}
+					}
+				}
+			}
+		},
+		"/signup": {
+			"get": {
+				"tags": [ "API service" ],
+				"summary": "Crear usuario",
+				"responses": {
+					"200": {
+						"description": "Sign up success, logged in"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			},
+			"post": {
+				"tags": [ "API service" ],
+				"summary": "Crear usuario",
+				"responses": {
+					"201": {
+						"description": "Sign up success, logged in"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			}
+		},
+		"/login": {
+			"get": {
+				"tags": [ "API service" ],
+				"summary": "Iniciar sesion de usuario",
+				"responses": {
+					"200": {
+						"description": "Login success"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			},
+			"post": {
+				"tags": [ "API service" ],
+				"summary": "Iniciar sesion de usuario",
+				"responses": {
+					"201": {
+						"description": "Login success"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
 			}
 		}
 	},
