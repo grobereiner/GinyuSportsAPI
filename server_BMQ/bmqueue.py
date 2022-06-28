@@ -71,7 +71,3 @@ class BMQueue:
         self.__write_queue_state()
 
         return result
-
-# test = BMQueue()
-# test.enqueue("NASHE")
-# # print(test.dequeue())

@@ -34,31 +34,6 @@ def token_required(f):
 def home():
     return controlador.home()
 
-"""
-@app.route('/validation')
-def login_home():
-    print("Login service home")
-    print("Press 1 to sign up")
-    print("Press 2 to log in")
-    num = int(input(""))
-    if num == 1:
-        return redirect('/signup')
-    elif num == 2:
-        return redirect('/login')
-
-    return
-"""
-
-"""
-@app.route('/logged')
-def logged():
-    print("You are logged in, press 2 to sign out")
-    num = int(input(""))
-    if num == 1:
-        return redirect('/signout')
-    return
-"""
-
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     return User().signup(request.form["email"], request.form["password"], app.secret_key)
