@@ -18,7 +18,7 @@ while terminar == 1:
 
 email = controlador.validation()
 
-token = input("Ingrese el token que se le ha enviado al correo que proporcionó: ")
+token = input("Ingrese el token que se le ha enviado al correo que proporciono: ")
 opcion = 0
 while opcion != 9:
     opcion = int(input("INGRESE 1 PARA BUSCAR TODO, 2 PARA INSERTAR NUEVOS DATOS, 3 PARA HACER SIGN OUT y 9 PARA SALIR: "))

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ginyu-Sports Playground: Sin servicio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #4b515b;
+        color: aliceblue;
+      }
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      #reconectar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #cajas {
+        display: flex;
+        align-items: center;
+      }
+      #consulta{
+        width: 50%;
+      }
+      #respuesta{
+        width: 50%;
+      }
+      textarea {
+        width: 85%;
+        height: 80%;
+        background-color: #2c2f35;
+        color: aliceblue;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 1%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">
+        <img
+          src="https://github.com/GU-U7/GinyuSportsAPI/raw/main/img/giniu.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Ginyu-Sports API Playground
+      </a>
+        <a class="navbar-brand "href="/logout">Log Out</a>  
+    </nav>
+    <br />
+    <div id="cajas">
+      <div id="consulta">
+        <h4 style="text-align: center;">Haga su solicitud</h2>
+        <textarea rows="6" id="query"></textarea>
+        <button onclick="consulta()" style="margin-left: 4em; margin-top: 1em;" type="button" class="btn btn-dark">Ejecutar</button>
+        <form style="margin-left: 4em; margin-top: 1em; margin-right: 4em;" id="login">
+            <div class="row">
+                <div class="col">
+                <label for="email">Ingrese su correo electrónico</label>
+                <input name="email" class="form-control" id="email" type="email"/>
+                </div>
+                <div class="col">
+                <label for="password"/>Ingrese su contraseña</label>
+                <input name="pass" class="form-control" id="pass" type="password"/>
+                </div>
+            </div><br>
+            <input class="btn btn-dark" type="submit"/>
+        </form>
+        <form style="margin-left: 4em; margin-top: 1em; margin-right: 4em;" id="tokenform">
+            <label for="token">Ingrese su token cuando se le pida</label><br>
+            <input name="token" class="form-control" id="token" type="password"><br>
+            <input class="btn btn-dark" type="submit"/>
+        </form>
+      </div>
+      <div id="respuesta">
+        <h4 style="text-align: center;">Resultados obtenidos</h2>
+            <textarea style="background-color: rgb(65, 63, 63);" rows="20" id="respuestas"></textarea>
+        <!-- <div style="background-color: rgb(65, 63, 63);height: 400px;margin-right: 12px;"><p id="respuestas"></p></div> -->
+      </div>
+    </div>
+
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        document.getElementById("login").onsubmit = function(e){
+            e.preventDefault();
+            fetch("/login", {
+                method:"POST",
+                body: JSON.stringify({
+                    "email":document.getElementById("email").value,
+                    "pass":document.getElementById("pass").value
+                }),
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(jsonResponse){
+                if(jsonResponse.status==-1){
+                    alert("BAD CREDENTIALS")
+                }
+                else if(jsonResponse.status==1){
+                    alert("INGRESA EL TOKEN QUE SE ENVIO A TU CORREO")
+                }
+            })
+        }
+        document.getElementById("tokenform").onsubmit = function(e){
+            e.preventDefault();
+            fetch("/token", {
+                method:"POST",
+                body: JSON.stringify({
+                    "token":document.getElementById("token").value
+                }),
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(jsonResponse){
+                if(jsonResponse.status==-1){
+                    alert("BAD TOKEN")
+                }
+                else if(jsonResponse.status==-2){
+                    alert("YOU MUST FIRST FILL THE LOG IN FORM")
+                }
+                else if(jsonResponse.status==1){
+                    alert("LOGGED IN COMPLETELY")
+                }
+            })
+        }
+
+
+        function consulta(){
+            let texto = document.getElementById("query").value;
+            fetch("/buscar", {
+                method:"POST",
+                body: JSON.stringify({
+                    query: texto
+                }),
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(jsonResponse){
+                console.log(jsonResponse.status)
+                if(jsonResponse.status==-1){
+                    alert("YOU MUST SIGN IN/UP")
+                }
+                else{
+                    let lineas = jsonResponse.contenido.split("\n")
+                    document.getElementById("respuestas").value = "";
+                    for(var i = 0; i<lineas.length; i++){
+                        document.getElementById("respuestas").value += lineas[i];
+                        document.getElementById("respuestas").value += "\n";
+                    }
+                    /* document.getElementById("respuestas").innerHTML = "";
+                    for(var i = 0; i<lineas.length; i++){
+                        document.getElementById("respuestas").innerHTML += lineas[i];
+                        document.getElementById("respuestas").innerHTML += "</p><p>";
+                    } */
+                    // document.getElementById("respuestas").innerHTML = jsonResponse.contenido;
+                }
+            })
+        }
+    </script>
+  </body>
+</html>

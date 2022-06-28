@@ -7,7 +7,8 @@ CREATE TABLE resultados (
     fecha DATE,
     team_one VARCHAR(50),
     team_two VARCHAR(50),
-    resultado VARCHAR(5)
+    resultado VARCHAR(5),
+    pais VARCHAR(50)
 );
 
 ALTER TABLE resultados ADD CONSTRAINT resultados_pk PRIMARY KEY(id);
