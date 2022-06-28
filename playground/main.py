@@ -27,7 +27,6 @@ def login():
         return jsonify({"status":-1})
     session["email"] = creds["email"]
     return jsonify({"status":1})
-    pass
 
 @app.route("/logout")
 def logout():
