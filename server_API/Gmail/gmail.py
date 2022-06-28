@@ -16,7 +16,7 @@ SCOPES = ["https://mail.google.com/"]
 
 token_file = "Gmail/token.json"
 
-def Create_Service():
+def create_service():
     creds = None
     # Se verifica si existen credenciales para acceder a la cuenta (es decir, si ya se ha accedido antes)
     if os.path.exists(token_file):
@@ -45,7 +45,7 @@ def Create_Service():
         return None
 
 def send_token_email(token, to_email):
-    service = Create_Service()
+    service = create_service()
 
     html_message = f"""\
         <html>
@@ -59,12 +59,12 @@ def send_token_email(token, to_email):
         """
 
     # MIME = Multipurpose Internet Mail Extensions - formato estándar para correos
-    mimeMessage = MIMEMultipart()
-    mimeMessage["to"] = to_email
-    mimeMessage["subject"] = "Bienvenido a Ginyu Sports API!"
-    mimeMessage.attach(MIMEText(html_message, "html"))
+    mime_message = MIMEMultipart()
+    mime_message["to"] = to_email
+    mime_message["subject"] = "Bienvenido a Ginyu Sports API!"
+    mime_message.attach(MIMEText(html_message, "html"))
 
-    encoded_message = base64.urlsafe_b64encode(mimeMessage.as_bytes()).decode()
+    encoded_message = base64.urlsafe_b64encode(mime_message.as_bytes()).decode()
 
     create_message = {
         'raw': encoded_message
