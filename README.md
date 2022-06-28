@@ -35,3 +35,14 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 ```
 
 ![](img/diagram.png)
+
+## Información sobre microservicios
+
+|puerto|servidor             |descripcion                                                                                         |
+|------|---------------------|----------------------------------------------------------------------------------------------------|
+|5000  | server_API          | servidor encargado de redirigir al microservicio adecuado si es un usuario o administrador         |
+|5001  | server_Admin        | microservicio encargado de realizar scraping de nuevos datos y de enviarlos al BMQ                 |
+|5002  | server_Search_Update| microservicio encargado de procesar consultas y poblar la base de datos                            |
+|5003  | server_BMQ          | microservicio encargado de ser una cola de mensaje en caso se realicen múltiples scrapings a la vez|
+|5004  | gmail_local_server  | microservicio para generar las respuestas y solicitudes con el GMAIL API                           |
+|5005  | playground         | portal amigable para que los clientes prueben la api de forma resumida                                                                           |
