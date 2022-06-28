@@ -30,8 +30,8 @@ def login():
 
 @app.route("/logout")
 def logout():
-    for idS in list(session.keys()):
-        session.pop(idS)
+    for ids in list(session.keys()):
+        session.pop(ids)
     return redirect("/")
 
 @app.route("/token", methods=["POST"])
@@ -54,7 +54,6 @@ def buscar():
         return jsonify({"status": -1})
     print(resp.text)
     return jsonify({"status": 1, "contenido": resp.text})
-    pass
 
 
 app.run(port=5005, debug=True)

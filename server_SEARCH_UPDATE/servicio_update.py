@@ -44,7 +44,6 @@ while True:
                 f = open("countries.json", "w")
                 json.dump(paises, f)
                 f.close()
-                pass
             except:
                 print("Fallo en la subida")
 
