@@ -1,5 +1,3 @@
-from pickle import TRUE
-from pydoc import render_doc
 from flask import Flask, jsonify, redirect, render_template, request, session
 import requests
 
@@ -15,7 +13,7 @@ def home():
         resp = requests.get(url="http://127.0.0.1:5000/")
         print(resp.text)
         return render_template("main_service.html")
-    except Exception as e:
+    except requests.exceptions.ConnectionError:
         return render_template("main_fail.html")
 
 @app.route("/login", methods=["POST"])
@@ -50,7 +48,7 @@ def buscar():
     print(busqueda)
     try:
         resp = requests.get(url="http://127.0.0.1:5000/search/"+busqueda, headers = {"jwt_token": session["token"], "email": session["email"]})
-    except:
+    except requests.exceptions.ConnectionError:
         return jsonify({"status": -1})
     print(resp.text)
     return jsonify({"status": 1, "contenido": resp.text})
