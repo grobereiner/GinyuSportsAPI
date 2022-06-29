@@ -15,7 +15,7 @@ def home():
         resp = requests.get(url="http://127.0.0.1:5000/")
         print(resp.text)
         return render_template("main_service.html")
-    except:
+    except Exception as e:
         return render_template("main_fail.html")
 
 @app.route("/login", methods=["POST"])
