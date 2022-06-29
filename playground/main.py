@@ -1,10 +1,14 @@
 from flask import Flask, jsonify, redirect, render_template, request, session
 import requests
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = b'\xcb\x1a\xa9P\xddF\xc5\xb7\xa8\xe3\x01\xad'
+
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 @app.route("/")
 def home():
