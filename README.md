@@ -46,3 +46,11 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 |5003  | server_BMQ          | microservicio encargado de ser una cola de mensaje en caso se realicen múltiples scrapings a la vez|
 |5004  | gmail_local_server  | microservicio para generar las respuestas y solicitudes con el GMAIL API                           |
 |5005  | playground         | portal amigable para que los clientes prueben la api de forma resumida                                                                           |
+
+## Comandos útiles
+```yml
+desde root: 
+  python -m coverage run --data-file=testing/.coverage testing/test_scrap.py # EJECUTAR TESTS
+  python -m coverage report --data-file=testing/.coverage # VER RESULTLADOS
+  python -m coverage xml -i --data-file=testing/.coverage -o testing/coverage.xml # OBTENER XML
+```
