@@ -11,12 +11,12 @@ def admin(prompt):
     try:
         resp = requests.get(url="http://127.0.0.1:5001/"+prompt)
         return resp.text
-    except:
+    except  requests.exceptions.ConnectionError:
         return error_ADMIN
 
 def search(query):
     try:
         resp = requests.get(url="http://127.0.0.1:5002/"+query)
         return resp.text
-    except:
+    except requests.exceptions.ConnectionError:
         return error_SEARCH
