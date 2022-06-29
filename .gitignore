@@ -10,5 +10,5 @@ __pycache__/
 /server_API/Gmail/API_key.txt
 /server_API/Gmail/client_id.json
 /server_API/Gmail/token.json
-
+/server_SEARCH_UPDATE/.env
 /server_BMQ/*.csv
