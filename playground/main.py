@@ -1,12 +1,14 @@
-from pickle import TRUE
-from pydoc import render_doc
 from flask import Flask, jsonify, redirect, render_template, request, session
 import requests
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = b'\xcb\x1a\xa9P\xddF\xc5\xb7\xa8\xe3\x01\xad'
+
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 @app.route("/")
 def home():
@@ -15,7 +17,7 @@ def home():
         resp = requests.get(url="http://127.0.0.1:5000/")
         print(resp.text)
         return render_template("main_service.html")
-    except:
+    except requests.exceptions.ConnectionError:
         return render_template("main_fail.html")
 
 @app.route("/login", methods=["POST"])
@@ -27,12 +29,11 @@ def login():
         return jsonify({"status":-1})
     session["email"] = creds["email"]
     return jsonify({"status":1})
-    pass
 
 @app.route("/logout")
 def logout():
-    for idS in list(session.keys()):
-        session.pop(idS)
+    for ids in list(session.keys()):
+        session.pop(ids)
     return redirect("/")
 
 @app.route("/token", methods=["POST"])
@@ -51,11 +52,10 @@ def buscar():
     print(busqueda)
     try:
         resp = requests.get(url="http://127.0.0.1:5000/search/"+busqueda, headers = {"jwt_token": session["token"], "email": session["email"]})
-    except:
+    except requests.exceptions.ConnectionError:
         return jsonify({"status": -1})
     print(resp.text)
     return jsonify({"status": 1, "contenido": resp.text})
-    pass
 
 
 app.run(port=5005, debug=True)

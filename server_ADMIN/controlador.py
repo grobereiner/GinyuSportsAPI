@@ -1,4 +1,4 @@
-from scrap import Scrap
+from scrap import scrapear
 import requests
 
 dummy_db = "../server_SEARCH/file.txt"
@@ -9,5 +9,5 @@ def send_to_bmq(csv_format):
 
 
 def main(prompt):
-    send_to_bmq(Scrap(prompt))
+    send_to_bmq(scrapear(prompt))
     return success

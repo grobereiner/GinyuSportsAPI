@@ -2,6 +2,10 @@ import requests
 import psycopg2
 from time import sleep
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 bmq_addr = "http://127.0.0.1:5003/enviar"
 # CAMBIAR PARA UN DIRECTORIO MEJOR
@@ -18,7 +22,7 @@ while True:
         host="localhost",
         database="ginyu",
         user="Grove",
-        password="root")
+        password=os.getenv('db_password'))
     cur = conn.cursor()
 
     try:
@@ -44,7 +48,6 @@ while True:
                 f = open("countries.json", "w")
                 json.dump(paises, f)
                 f.close()
-                pass
             except:
                 print("Fallo en la subida")
 

@@ -57,21 +57,17 @@ class BMQueue:
         if self.__is_empty():
             return ""
         
-        tFront = self.data["front"]
-        if tFront == self.data["back"]:
+        t_front = self.data["front"]
+        if t_front == self.data["back"]:
             self.data["front"] = self.data["back"] = -1
         else:
             self.data["front"] = self.__next(self.data["front"])
         
         result = None
-        with open(cache_name(tFront), "r") as f:
+        with open(cache_name(t_front), "r") as f:
             result = f.read()
             f.close()
         
         self.__write_queue_state()
 
         return result
-
-# test = BMQueue()
-# test.enqueue("NASHE")
-# # print(test.dequeue())

@@ -9,7 +9,7 @@ while terminar == 1:
         resp = requests.get(url="http://127.0.0.1:5000/")
         print(resp.text)
         break
-    except:
+    except requests.exceptions.ConnectionError:
         print(errorNoHost)
         terminar = int(input("INGRESE 1 PARA RECONECTAR: "))
         if terminar != 1:

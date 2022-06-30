@@ -3,10 +3,13 @@ import controlador
 from user import User, db
 from functools import wraps
 import jwt
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 app.secret_key = b'\xcb\x1a\xa9P\xddF\xc5\xb7\xa8\xe3\x01\xad'
 
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 def token_required(f):
     @wraps(f)
@@ -33,31 +36,6 @@ def token_required(f):
 @app.route("/")
 def home():
     return controlador.home()
-
-"""
-@app.route('/validation')
-def login_home():
-    print("Login service home")
-    print("Press 1 to sign up")
-    print("Press 2 to log in")
-    num = int(input(""))
-    if num == 1:
-        return redirect('/signup')
-    elif num == 2:
-        return redirect('/login')
-
-    return
-"""
-
-"""
-@app.route('/logged')
-def logged():
-    print("You are logged in, press 2 to sign out")
-    num = int(input(""))
-    if num == 1:
-        return redirect('/signout')
-    return
-"""
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
