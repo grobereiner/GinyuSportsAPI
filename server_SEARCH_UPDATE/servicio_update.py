@@ -48,10 +48,11 @@ while True:
                 f = open("countries.json", "w")
                 json.dump(paises, f)
                 f.close()
-            except:
+            except psycopg2.Error:
+                conn.rollback()
                 print("Fallo en la subida")
 
-    except:
+    except requests.exceptions.ConnectionError:
         print("NO HAY CONEXION AL BMQ")
     
     cur.close()
