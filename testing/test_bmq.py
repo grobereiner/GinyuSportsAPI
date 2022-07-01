@@ -2,7 +2,7 @@ import unittest
 from server_BMQ.bmqueue import cache_name
 from server_BMQ.bmqueue import BMQueue
 
-class Test_BMQ(unittest.TestCase):
+class TestBMQ(unittest.TestCase):
 
     def test_cache_name(self):
         self.assertEqual(cache_name(2), "cache2.csv")
