@@ -22,7 +22,6 @@ def scrap(prompt):
 		abort(405)
 
 
-
 @app.route("/search/<query>")
 def search(query):
 	try:
