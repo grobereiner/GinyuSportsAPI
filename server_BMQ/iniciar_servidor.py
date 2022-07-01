@@ -1,13 +1,9 @@
 from flask import Flask, request, send_file
 import bmqueue
-from flask_wtf import CSRFProtect
 
 cache_file = "cache.csv"
 
 app = Flask(__name__)
-
-csrf = CSRFProtect()
-csrf.init_app(app)
 
 bmq = bmqueue.BMQueue()
 

@@ -3,13 +3,9 @@ import controlador
 from user import User, db
 from functools import wraps
 import jwt
-from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 app.secret_key = b'\xcb\x1a\xa9P\xddF\xc5\xb7\xa8\xe3\x01\xad'
-
-csrf = CSRFProtect()
-csrf.init_app(app)
 
 def token_required(f):
     @wraps(f)
@@ -24,7 +20,7 @@ def token_required(f):
 
         try:
             decoded_token = jwt.decode(token, app.secret_key, algorithms="HS256")
-        except: 
+        except jwt.exceptions.DecodeError: 
             return "Token inválido, haga sign out y genere uno nuevo"
 
         if db.users.find_one({"email": decoded_token["user"]})["email"] == email:
@@ -37,12 +33,20 @@ def token_required(f):
 def home():
     return controlador.home()
 
-@app.route('/signup', methods=['POST', 'GET'])
-def signup():
+@app.route('/signup', methods=['POST'])
+def signup_post():
     return User().signup(request.form["email"], request.form["password"], app.secret_key)
 
-@app.route('/login', methods=['POST', 'GET'])
-def login():
+@app.route('/signup', methods=['GET'])
+def signup_get():
+    return User().signup(request.form["email"], request.form["password"], app.secret_key)
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    return User().login(request.form["email"], request.form["password"], app.secret_key)
+
+@app.route('/login', methods=['GET'])
+def login_get():
     return User().login(request.form["email"], request.form["password"], app.secret_key)
 
 @app.route('/signout')

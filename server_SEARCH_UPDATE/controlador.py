@@ -30,11 +30,10 @@ def resultados_formato(resultados):
 
 def main(query, cur):    
     proximo = procesar(query)
-    resultados = None
-    try:
-        cur.execute(query_resultados(proximo))
-        resultados = resultados_formato(cur.fetchall())
-    except:
+    resultados = None        
+    cur.execute(query_resultados(proximo))
+    resultados = resultados_formato(cur.fetchall())
+    if len(resultados) == 0:
         return "No hay similitudes"
     return resultados
     

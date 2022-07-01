@@ -1,10 +1,10 @@
 import json
 
 cache_name = lambda num: "cache"+str(num)+".csv"
-json_data_path = "queue_init.json"
+
 
 class BMQueue:
-    def __init__(self):
+    def __init__(self, json_data_path = "queue_init.json"):
         self.data = None
         with open(json_data_path) as f:
             self.data = json.load(f)
@@ -23,7 +23,7 @@ class BMQueue:
     def __is_empty(self) -> bool:
         return self.data["front"] == -1
 
-    def __write_queue_state(self):
+    def __write_queue_state(self, json_data_path = "queue_init.json"):
         with open(json_data_path, "w") as f:
             json.dump(self.data, f)
             f.close()
