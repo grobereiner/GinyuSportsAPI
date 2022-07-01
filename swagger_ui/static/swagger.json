@@ -1,0 +1,184 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"description": "API routes",
+		"version": "0.8.0",
+		"title": "Ginyu Sports API Docs"
+	},
+	"servers": [
+		{ "url": "/admin"},
+		{ "url": "/validation" },
+		{ "url": "/search" },
+		{ "url": "/" }
+	],
+	"tags": [
+		{
+			"name": "Search/Update service",
+			"description": "Servicio para realizar busquedas en la base de datos"
+		},
+		{
+			"name": "Admin service",
+			"description": "Servicio para scrappear resultados de partidos de futbol de una pagina y cargarlos a la base de datos"
+		},
+		{
+			"name": "Validation service",
+			"description": "Servicios relacionados al API"
+		}
+	],
+	"paths": {
+		"/{query}": {
+			"get": {
+				"tags": [ "Search/Update service" ],
+				"summary": "Realiza una consulta a la base de datos",
+				"responses": {
+					"200": {
+						"description": "Devuelve la lista de partidos relacionados a la consulta",
+						"schema": {
+							"$ref": "#/components/schemas/Partido"
+						}
+					},
+					"405": {
+						"description": "Servicio no disponible"
+					}
+				},
+				"parameters": [
+					{
+						"name": "query",
+						"in": "path",
+						"required": true,
+						"description": "Nombre de equipo o equipos",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/{prompt}": {
+			"post": {
+				"tags": [ "Admin service" ],
+				"summary": "Hace un scrapping de los resultados ingresados en el prompt",
+				"parameters": [
+					{
+						"name": "prompt",
+						"in": "path",
+						"required": true,
+						"description": "Informacion que sera recuperada mediante el scrapping",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Carga los elementos a la base de datos y la actualiza",
+						"schema": {
+							"$ref": "#/components/schemas/Partido"
+						}
+					},
+					"405": {
+						"description": "Servicio de scrapping no funcional"
+					}
+				}
+			}
+		},
+		"/signup": {
+			"get": {
+				"tags": [ "Validation service" ],
+				"summary": "Crear usuario",
+				"responses": {
+					"200": {
+						"description": "Sign up success, logged in"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			},
+			"post": {
+				"tags": [ "Validation service" ],
+				"summary": "Crear usuario",
+				"responses": {
+					"201": {
+						"description": "Sign up success, logged in"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			}
+		},
+		"/login": {
+			"get": {
+				"tags": [ "Validation service" ],
+				"summary": "Iniciar sesion de usuario",
+				"responses": {
+					"200": {
+						"description": "Login success"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			},
+			"post": {
+				"tags": [ "Validation service" ],
+				"summary": "Iniciar sesion de usuario",
+				"responses": {
+					"201": {
+						"description": "Login success"
+					},
+					"400": {
+						"description": "Invalid login credentials"
+					}
+				}
+			}
+		},
+		"/signout": {
+			"get": {
+				"tags": [ "Validation service" ],
+				"summary": "Cerrar la sesion del usuario",
+				"responses": {
+					"200": {
+						"description": "Signout succesful"
+					},
+					"405": {
+						"description": "Server is down, can't signout the user"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Partido": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "id"
+					},
+					"fecha":{
+						"type": "date"
+					},
+					"team_one": {
+						"type": "string"
+					},
+					"team_two": {
+						"type": "string"
+					},
+					"resultado": {
+						"type": "string",
+						"format": "golesEquipo1-golesEquipo2"
+					}
+				}
+			},
+			"Usuario": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
