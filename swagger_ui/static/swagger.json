@@ -2,33 +2,33 @@
 	"openapi": "3.0.0",
 	"info": {
 		"description": "API routes",
-		"version": "1.0.0",
-		"title": "Ginyu Sports API"
+		"version": "0.8.0",
+		"title": "Ginyu Sports API Docs"
 	},
 	"servers": [
 		{ "url": "/admin"},
-		{ "url": "/api" },
+		{ "url": "/validation" },
 		{ "url": "/search" },
 		{ "url": "/" }
 	],
 	"tags": [
 		{
-			"name": "SEARCH service",
+			"name": "Search/Update service",
 			"description": "Servicio para realizar busquedas en la base de datos"
 		},
 		{
-			"name": "Scrap service",
+			"name": "Admin service",
 			"description": "Servicio para scrappear resultados de partidos de futbol de una pagina y cargarlos a la base de datos"
 		},
 		{
-			"name": "API service",
+			"name": "Validation service",
 			"description": "Servicios relacionados al API"
 		}
 	],
 	"paths": {
 		"/{query}": {
 			"get": {
-				"tags": [ "SEARCH service" ],
+				"tags": [ "Search/Update service" ],
 				"summary": "Realiza una consulta a la base de datos",
 				"responses": {
 					"200": {
@@ -37,7 +37,7 @@
 							"$ref": "#/components/schemas/Partido"
 						}
 					},
-					"503": {
+					"405": {
 						"description": "Servicio no disponible"
 					}
 				},
@@ -54,7 +54,7 @@
 		},
 		"/{prompt}": {
 			"post": {
-				"tags": [ "Scrap service" ],
+				"tags": [ "Admin service" ],
 				"summary": "Hace un scrapping de los resultados ingresados en el prompt",
 				"parameters": [
 					{
@@ -80,7 +80,7 @@
 		},
 		"/signup": {
 			"get": {
-				"tags": [ "API service" ],
+				"tags": [ "Validation service" ],
 				"summary": "Crear usuario",
 				"responses": {
 					"200": {
@@ -92,7 +92,7 @@
 				}
 			},
 			"post": {
-				"tags": [ "API service" ],
+				"tags": [ "Validation service" ],
 				"summary": "Crear usuario",
 				"responses": {
 					"201": {
@@ -106,7 +106,7 @@
 		},
 		"/login": {
 			"get": {
-				"tags": [ "API service" ],
+				"tags": [ "Validation service" ],
 				"summary": "Iniciar sesion de usuario",
 				"responses": {
 					"200": {
@@ -118,7 +118,7 @@
 				}
 			},
 			"post": {
-				"tags": [ "API service" ],
+				"tags": [ "Validation service" ],
 				"summary": "Iniciar sesion de usuario",
 				"responses": {
 					"201": {
@@ -126,6 +126,20 @@
 					},
 					"400": {
 						"description": "Invalid login credentials"
+					}
+				}
+			}
+		},
+		"/signout": {
+			"get": {
+				"tags": [ "Validation service" ],
+				"summary": "Cerrar la sesion del usuario",
+				"responses": {
+					"200": {
+						"description": "Signout succesful"
+					},
+					"405": {
+						"description": "Server is down, can't signout the user"
 					}
 				}
 			}
