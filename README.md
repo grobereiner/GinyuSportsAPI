@@ -50,7 +50,8 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 ## Comandos útiles
 ```yml
 desde root: 
-  python -m coverage run --data-file=testing/.coverage testing/test_scrap.py # EJECUTAR TESTS
+  python -m coverage run --data-file=testing/coverage/.coverage_<nombre de carpeta a testear> testing/test_<nombre de carpeta a testear>.py # EJECUTAR TESTS
+  python -m coverage combine testing/coverages/.coverage_* # MERGEAR COVERAGES
   python -m coverage report --data-file=testing/.coverage # VER RESULTLADOS
   python -m coverage xml -i --data-file=testing/.coverage -o testing/coverage.xml # OBTENER XML
 ```
