@@ -3,13 +3,9 @@ import controlador
 from user import User, db
 from functools import wraps
 import jwt
-from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 app.secret_key = b'\xcb\x1a\xa9P\xddF\xc5\xb7\xa8\xe3\x01\xad'
-
-csrf = CSRFProtect()
-csrf.init_app(app)
 
 def token_required(f):
     @wraps(f)
