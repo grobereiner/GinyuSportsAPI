@@ -37,12 +37,20 @@ def token_required(f):
 def home():
     return controlador.home()
 
-@app.route('/signup', methods=['POST', 'GET'])
-def signup():
+@app.route('/signup', methods=['POST'])
+def signup_post():
     return User().signup(request.form["email"], request.form["password"], app.secret_key)
 
-@app.route('/login', methods=['POST', 'GET'])
-def login():
+@app.route('/signup', methods=['GET'])
+def signup_get():
+    return User().signup(request.form["email"], request.form["password"], app.secret_key)
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    return User().login(request.form["email"], request.form["password"], app.secret_key)
+
+@app.route('/login', methods=['GET'])
+def login_get():
     return User().login(request.form["email"], request.form["password"], app.secret_key)
 
 @app.route('/signout')
