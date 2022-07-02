@@ -34,7 +34,7 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 |--servicio.py
 ```
 
-![](img/diagram.png)
+![](img/diagram.PNG)
 
 ## Información sobre microservicios
 
