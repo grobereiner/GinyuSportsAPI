@@ -9,12 +9,12 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-CLIENT_SECRET_FILE = "Gmail/client_id.json"
+CLIENT_SECRET_FILE = r"E:\Eduardo\UTEC\2022-1\Software\GinyuSportsAPI\server_API\Gmail\client_id.json"
 API_SERVICE_NAME = "gmail"
 API_VERSION = "v1"
 SCOPES = ["https://mail.google.com/"]
 
-token_file = "Gmail/token.json"
+token_file = r"E:\Eduardo\UTEC\2022-1\Software\GinyuSportsAPI\server_API\Gmail\token.json"
 
 def create_service():
     creds = None
