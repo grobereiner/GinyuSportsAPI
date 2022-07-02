@@ -17,21 +17,33 @@ Son acciones complejas que no están relacionadas por lo que es factible separar
 ### Directorios y diagrama:
 
 ```py
--cli_API
+-admin_cui
 |--controlador.py
-|--servicio.py
+|--main.py
+
+-playground
+|--main.py
 
 -server_ADMIN
 |--controlador.py
-|--dao.py
-|--servicio.py
+|--iniciar_servidor.py
+|--scrap.py
+
 -server_API
+|--Gmail
+|--|--gmail.py
 |--controlador.py
-|--servicio.py
--server_SEARCH
+|--iniciar_servidor.py
+|--user.py
+
+-server_SEARCH_UPDATE
 |--controlador.py
-|--dao.py
-|--servicio.py
+|--iniciar_servidor.py
+|--servicio_update.py
+
+-server_BMQ
+|--bmqueue.py
+|--iniciar_servidor.py
 ```
 
 ![](img/diagram.PNG)
