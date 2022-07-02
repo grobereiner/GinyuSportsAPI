@@ -9,7 +9,7 @@ class Testear(unittest.TestCase):
                          "Signup success, logged in")
 
     def test_signup_email_exists(self):
-        self.assertEqual(User.signup(self, "ginyusportsapi@gmail.com", "pruebas", app.secret_key),
+        self.assertEqual(User.signup(self, "eduardo.arrospide@utec.edu.pe", "pruebas", app.secret_key),
                          "Email already exists")
 
     def test_signup_email_not_valid(self):
@@ -17,11 +17,11 @@ class Testear(unittest.TestCase):
                          "Email inválido")
 
     def test_login_success(self):
-        self.assertEqual(User.login(self, "ginyusportsapi@gmail.com", "pruebas", app.secret_key),
+        self.assertEqual(User.login(self, "eduardo.arrospide@utec.edu.pe", "pruebas", app.secret_key),
                          "Login success")
 
     def test_login_failed(self):
-        self.assertEqual(User.login(self, "ginyusportsapi@gmail.com", "noeslaclave", app.secret_key),
+        self.assertEqual(User.login(self, "eduardo.arrospide@utec.edu.pe", "noeslaclave", app.secret_key),
                          "Invalid login credentials")
 
     def test_signout(self):
